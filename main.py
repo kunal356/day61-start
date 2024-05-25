@@ -1,8 +1,8 @@
 from flask import Flask, render_template
 from config import SECRET_KEY
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, PasswordField
-from wtforms.validators import DataRequired
+from wtforms import StringField, SubmitField, PasswordField, EmailField
+from wtforms.validators import DataRequired, Email, Length
 
 
 '''
@@ -23,8 +23,8 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = SECRET_KEY
 
 class MyForm(FlaskForm):
-    name = StringField('Name', validators=[DataRequired()])
-    password = PasswordField('Password', validators=[DataRequired()])
+    email = EmailField('Email', validators=[DataRequired(), Email()])
+    password = PasswordField('Password', validators=[DataRequired(), Length(min=8)])
     submit = SubmitField('Submit')
 
 
@@ -35,11 +35,12 @@ def home():
 @app.route("/login", methods=['GET', 'POST'])
 def login():
     form = MyForm()
-    name = None
+    email = None
+    
     if form.validate_on_submit():
-        name = form.name.data
-        form.name.data = ''
-    return render_template('login.html', form=form, name=name)
+        email = form.email.data
+        form.email.data = ''
+    return render_template('login.html', form=form, email=email)
 
 
 if __name__ == '__main__':
