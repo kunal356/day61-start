@@ -38,8 +38,13 @@ def login():
     email = None
     
     if form.validate_on_submit():
-        email = form.email.data
-        form.email.data = ''
+        if form.email.data == "admin@email.com" and form.password.data == "12345678":
+            form.email.data = ''
+            form.password.data = ''
+            return render_template('success.html')
+        else:
+            return render_template('denied.html')
+    
     return render_template('login.html', form=form, email=email)
 
 
