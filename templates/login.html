@@ -14,16 +14,13 @@
 	<div class="container">
 		<h1>Login</h1>
 		<!-- This is where our form will go. -->
-		<form method="POST" action="">
+		<form method="POST" action="{{url_for('login')}}">
 			{{ form.hidden_tag() }}
 			<p>
 				{{ form.name.label }}<br>
 				{{ form.name(size=32) }}<br>
-				{{form.password.label}}
-				{{form.password}}
-				{% for error in form.name.errors %}
-				<span style="color: red;">[{{ error }}]</span>
-				{% endfor %}
+				{{form.password.label}}<br>
+				{{form.password}}<br>				
 			</p>
 			<p>{{ form.submit() }}</p>
 		</form>
