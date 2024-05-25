@@ -3,7 +3,7 @@ from config import SECRET_KEY
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, PasswordField, EmailField
 from wtforms.validators import DataRequired, Email, Length
-
+from flask_bootstrap import Bootstrap5
 '''
 Red underlines? Install the required packages first: 
 Open the Terminal in PyCharm (bottom left). 
@@ -19,6 +19,7 @@ This will install the packages from requirements.txt for this project.
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = SECRET_KEY
+bootstrap = Bootstrap5(app)
 
 
 class MyForm(FlaskForm):

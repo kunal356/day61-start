@@ -1,41 +1,33 @@
-<!DOCTYPE HTML>
+{% extends "base.html" %}
+{% block title %}<title>Login</title>{% endblock %}
+{%block content %}
+{% if email %}
+<h1>Hello {{email}}!! You have successfully submitted the form</h1>
+{% else %}
 
-<html>
-
-<head>
-	<title>Login</title>
-</head>
-
-<body>
-	{% if email %}
-	<h1>Hello {{email}}!! You have successfully submitted the form</h1>
-	{% else %}
-	
-	<div class="container">
-		<h1>Login</h1>
-		<!-- This is where our form will go. -->
-		<form method="POST" action="{{url_for('login')}}" novalidate>
-			{{ form.hidden_tag() }}
-			<p>
-				{{ form.email.label }}<br>
-				{{ form.email(size=32) }}
-				{% for err in form.email.errors %}
-				<span style="color: red;">{{err}}</span>
-				{% endfor %}
-				<br>
-			</p>
-			<p>
-				{{form.password.label}}<br>
-				{{form.password}}
-				{% for err in form.password.errors %}
-				<span style="color: red;">{{err}}</span>
-				{% endfor %}
-				<br>
-			</p>
-			<p>{{ form.submit() }}</p>
-		</form>
-	</div>
-	{% endif %}
-</body>
-
-</html>
+<div class="container">
+	<h1>Login</h1>
+	<!-- This is where our form will go. -->
+	<form method="POST" action="{{url_for('login')}}" novalidate>
+		{{ form.hidden_tag() }}
+		<p>
+			{{ form.email.label }}<br>
+			{{ form.email(size=32) }}
+			{% for err in form.email.errors %}
+			<span style="color: red;">{{err}}</span>
+			{% endfor %}
+			<br>
+		</p>
+		<p>
+			{{form.password.label}}<br>
+			{{form.password}}
+			{% for err in form.password.errors %}
+			<span style="color: red;">{{err}}</span>
+			{% endfor %}
+			<br>
+		</p>
+		<p>{{ form.submit() }}</p>
+	</form>
+</div>
+{% endif %}
+{% endblock %}
